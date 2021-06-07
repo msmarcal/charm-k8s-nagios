@@ -1,4 +1,4 @@
-# k8s-nagios
+# nagios-k8s
 
 ## Description
 

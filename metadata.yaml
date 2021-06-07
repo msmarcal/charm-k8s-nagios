@@ -1,0 +1,24 @@
+# Copyright 2021 Marcelo Marcal
+# See LICENSE file for licensing details.
+name: nagios-k8s
+description: |
+  Nagios is a monitoring and management system for hosts, services, and
+  networks.
+summary: |
+  Nagios Core 4 monitoring.
+
+requires:
+  nagios:
+    interface: juju-info
+  monitors:
+    interface: monitors
+
+containers:
+  nagios:
+    resource: nagios-image
+
+resources:
+  nagios-image:
+    type: oci-image
+    description: OCI image for nagios (msmarcal/nagios)
+
