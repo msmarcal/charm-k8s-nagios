@@ -1,4 +1,4 @@
-# nagios-k8s
+# charm-k8s-nagios
 
 ## Description
 
