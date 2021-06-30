@@ -31,14 +31,10 @@ class K8SNagiosCharm(CharmBase):
         super().__init__(*args)
         self.framework.observe(self.on.nagios_pebble_ready, self._on_nagios_pebble_ready)
 
-        # -- config changed observation
-        # self.framework.observe(self.on.config_changed, self._on_config_changed)
-
         # -- monitors relation observation
         self.framework.observe(self.on["monitors"].relation_changed, self._on_monitors_changed)
         self.framework.observe(self.on["monitors"].relation_departed, self._on_monitors_departed)
 
-        # self._stored.set_default(extraconfig=[])
 
     def _on_nagios_pebble_ready(self, event):
         """Define and start a workload using the Pebble API."""
@@ -79,20 +75,6 @@ class K8SNagiosCharm(CharmBase):
             container.stop("nagiossvc")
 
         container.start("nagiossvc")
-
-
-
-    # def _on_config_changed(self, _):
-    #     """Changed extraconfig configuration."""
-    #     container = self.unit.get_container("nagios")
-    #     current = self.config["extraconfig"]
-    #     if current not in self._stored.extraconfig:
-    #         logger.info("found a new extraconfig: [%r]", current)
-    #         self._stored.extraconfig.append(current)
-    #         container.push(EXTRA_CFG, current)
-    #     if current == "" and os.path.isfile(EXTRA_CFG):
-    #         logger.info("Removing {}...".format(EXTRA_CFG))
-    #         container.remove_path(EXTRA_CFG)
 
 
     def _on_monitors_changed(self, event: EventBase):
